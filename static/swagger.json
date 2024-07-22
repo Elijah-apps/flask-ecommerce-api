@@ -1,0 +1,318 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "API documentation for the E-commerce System",
+      "version": "1.0.0",
+      "title": "E-commerce API"
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Product",
+        "description": "Product management"
+      },
+      {
+        "name": "Order",
+        "description": "Order management"
+      },
+      {
+        "name": "Customer",
+        "description": "Customer management"
+      }
+    ],
+    "paths": {
+      "/products": {
+        "get": {
+          "tags": ["Product"],
+          "summary": "Get all products",
+          "responses": {
+            "200": {
+              "description": "Successful operation"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Product"],
+          "summary": "Create a new product",
+          "parameters": [
+            {
+              "name": "product",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "price": { "type": "number" },
+                  "stock": { "type": "integer" }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": { "description": "Product created" },
+            "400": { "description": "Invalid input" }
+          }
+        }
+      },
+      "/products/{product_id}": {
+        "get": {
+          "tags": ["Product"],
+          "summary": "Get product details",
+          "parameters": [
+            {
+              "name": "product_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": { "description": "Successful operation" },
+            "404": { "description": "Product not found" }
+          }
+        },
+        "put": {
+          "tags": ["Product"],
+          "summary": "Update a product",
+          "parameters": [
+            {
+              "name": "product_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "product",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "price": { "type": "number" },
+                  "stock": { "type": "integer" }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": { "description": "Product updated" },
+            "400": { "description": "Invalid input" },
+            "404": { "description": "Product not found" }
+          }
+        },
+        "delete": {
+          "tags": ["Product"],
+          "summary": "Delete a product",
+          "parameters": [
+            {
+              "name": "product_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": { "description": "Product deleted" },
+            "404": { "description": "Product not found" }
+          }
+        }
+      },
+      "/orders": {
+        "get": {
+          "tags": ["Order"],
+          "summary": "Get all orders",
+          "responses": {
+            "200": { "description": "Successful operation" }
+        }
+      },
+      "post": {
+        "tags": ["Order"],
+        "summary": "Create a new order",
+        "parameters": [
+          {
+            "name": "order",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product_id": { "type": "string" },
+                "quantity": { "type": "integer" },
+                "customer_id": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Order created" },
+          "400": { "description": "Invalid input" }
+        }
+      }
+    },
+    "/orders/{order_id}": {
+      "get": {
+        "tags": ["Order"],
+        "summary": "Get order details",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successful operation" },
+          "404": { "description": "Order not found" }
+        }
+      },
+      "put": {
+        "tags": ["Order"],
+        "summary": "Update an order",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product_id": { "type": "string" },
+                "quantity": { "type": "integer" },
+                "customer_id": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Order updated" },
+          "400": { "description": "Invalid input" },
+          "404": { "description": "Order not found" }
+        }
+      },
+      "delete": {
+        "tags": ["Order"],
+        "summary": "Delete an order",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Order deleted" },
+          "404": { "description": "Order not found" }
+        }
+      }
+    },
+    "/customers": {
+      "get": {
+        "tags": ["Customer"],
+        "summary": "Get all customers",
+        "responses": {
+          "200": { "description": "Successful operation" }
+        }
+      },
+      "post": {
+        "tags": ["Customer"],
+        "summary": "Create a new customer",
+        "parameters": [
+          {
+            "name": "customer",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "email": { "type": "string" },
+                "address": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Customer created" },
+          "400": { "description": "Invalid input" }
+        }
+      }
+    },
+    "/customers/{customer_id}": {
+      "get": {
+        "tags": ["Customer"],
+        "summary": "Get customer details",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Successful operation" },
+          "404": { "description": "Customer not found" }
+        }
+      },
+      "put": {
+        "tags": ["Customer"],
+        "summary": "Update a customer",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customer",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "email": { "type": "string" },
+                "address": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Customer updated" },
+          "400": { "description": "Invalid input" },
+          "404": { "description": "Customer not found" }
+        }
+      },
+      "delete": {
+        "tags": ["Customer"],
+        "summary": "Delete a customer",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Customer deleted" },
+          "404": { "description": "Customer not found" }
+        }
+      }
+    }
+  }
+}
+
+  
